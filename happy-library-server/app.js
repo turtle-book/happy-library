@@ -4,17 +4,17 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const dotenv = require('dotenv');
+const passport = require('passport');
+const cors = require('cors');
 
-dotenv.config();  // .env 파일로부터 환경변수 로드
+dotenv.config();
+const authRouter = require('./routes/auth');
+const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
-// 라우터 require
-
-const { sequelize } = require('./models');  // 'sequelize' 객체 가져오기
-
-const app = express();  // express 인스턴스 생성
-app.set('port', process.env.PORT || 8000);  // 포트 설정
-
-// 시퀄라이즈와 MySQL 연동
+const app = express();
+passportConfig();
+app.set('port', process.env.PORT || 8000);
 sequelize.sync({ force: false })
   .then(() => {
     console.log('데이터베이스 연결 성공');
@@ -22,6 +22,11 @@ sequelize.sync({ force: false })
   .catch((err) => {
     console.error(err);
   });
+
+app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 // 미들웨어 셋팅
 app.use(morgan('dev'));
@@ -39,7 +44,11 @@ app.use(session({
   },
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // 라우터 연결
+app.use('/auth', authRouter);
 
 // 404 Not Found 에러 캐치
 app.use((req, res, next) => {

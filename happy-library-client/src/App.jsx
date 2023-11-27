@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Layout from './components/pages/Layout/Layout';
 import Home from './components/pages/Home/Home';
 import LoginPage from './components/pages/LoginPage/LoginPage';
+import JoinPage from './components/pages/JoinPage/JoinPage';
 import MyPage from './components/pages/MyPage/MyPage';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<LoginPage />} />
+          <Route path='/join' element={<JoinPage />} />
           <Route path='/mypage' element={<MyPage />} />
         </Routes>
       </Layout>

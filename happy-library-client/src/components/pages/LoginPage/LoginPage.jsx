@@ -34,8 +34,8 @@ function LoginPage() {
         // 리다이렉트 코드
       } else {
         alert(`로그인 실패: ${content}`);
-        email.value = "";
-        password.value = "";
+        email.value = '';
+        password.value = '';
       }
     } catch (error) {
       console.error(error);
