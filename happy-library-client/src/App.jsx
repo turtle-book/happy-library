@@ -1,12 +1,14 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Layout from './layouts/Layout';
-import HomePage from './pages/HomePage/HomePage';
-import JoinPage from './pages/JoinPage/JoinPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import MyPage from './pages/MyPage/MyPage';
-import './App.css';
+import { useSelector } from "react-redux";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+
+import Layout from "./layouts/Layout";
+import HomePage from "./pages/HomePage/HomePage";
+import JoinPage from "./pages/JoinPage/JoinPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import MyInfoPage from "./pages/MyInfoPage/MyInfoPage";
+import SearchResultsPage from "./pages/SearchResultsPage/SearchResultsPage";
+
+import "./App.css";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
@@ -16,16 +18,17 @@ function App() {
       <Layout>
         <nav>
           {isLoggedIn ? (
-            <Link to='/mypage'>마이페이지</Link>
+            <Link to="/my-info">내 정보</Link>
           ) : (
-            <Link to='/login'>로그인</Link>
+            <Link to="/login">로그인</Link>
           )}
         </nav>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/join' element={<JoinPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/mypage' element={<MyPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/join" element={<JoinPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/my-info" element={<MyInfoPage />} />
+          <Route path="/search" element={<SearchResultsPage />} />
         </Routes>
       </Layout>
     </Router>

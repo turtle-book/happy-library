@@ -1,6 +1,6 @@
 // import
 
-function Layout() {
+function MyInfoPage() {
   return (
     <div>
       //
@@ -8,4 +8,4 @@ function Layout() {
   )
 }
 
-export default Layout;
+export default MyInfoPage;

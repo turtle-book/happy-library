@@ -25,7 +25,7 @@ sequelize.sync({ force: false })
 
 app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: `${process.env.CLIENT_URL}`
 }));
 
 // 미들웨어 셋팅
